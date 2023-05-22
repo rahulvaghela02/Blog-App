@@ -6,6 +6,7 @@ import com.blogapp.service.PostService;
 import com.blogapp.utils.AppConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,6 +21,7 @@ public class PostController {
         this.postService = postService;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("createpost")
     public ResponseEntity<PostDto> createPost(@Valid @RequestBody PostDto postDto)
     {
